@@ -1,9 +1,24 @@
-document.querySelector('button').addEventListener('click', function () {
-    fetch('https://localhost:44306/api/Verificador?CPF=11634098633')
+function BuscarDadosAPI() {
+  var cpfInput = document.getElementById('inputCPF').value;
+  var msg = document.getElementById('Mensagem').value;
+  fetch('https://localhost:44306/api/Verificador?CPF=' + cpfInput)
       .then((response) => {
-        return response.json();
+          return response.json();
       })
       .then((myContent) => {
-        CPFFormatado.innerHTML = myContent['cpf'];
+          if (myContent['valido'] == false) {
+              cpfOK.style.display = "none";
+          }
+          else {
+              cpfOK.style.display = "block";          
+          }
+          CPFFormatado.innerHTML = myContent['cpf'];
+          OrigemCPF.innerHTML = myContent['origem'];
       });
-  }, false);
+}
+
+function Inicio() {
+  cpfOK.style.display = "none"
+}
+
+window.onload = Inicio;
