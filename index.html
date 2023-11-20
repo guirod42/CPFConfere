@@ -127,12 +127,37 @@
             line-height: 1.8
         }
     </style>
+    <script>
+        function BuscarDadosAPI() {
+            var cpfInput = document.getElementById('inputCPF').value;
+            fetch('https://localhost:44306/api/Verificador?CPF=' + cpfInput)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((myContent) => {
+                    if (myContent['valido'] == false) {
+                        cpfOK.style.display = "none"
+                    }
+                    else {
+                        cpfOK.style.display = "block"
+                    }
+                    CPFFormatado.innerHTML = myContent['cpf'];
+                    OrigemCPF.innerHTML = myContent['origem'];
+                });
+        }
+
+        function Inicio() {
+            cpfOK.style.display = "none"
+        }
+
+        window.onload = Inicio;
+    </script>
 </head>
 
 <body>
     <main>
         <header>
-            <h1>Sistema Verificador de CPF’s</h1>
+            <h1>Sistema Verificador de CPF’s 1.0</h1>
         </header>
         <article>
             <h2>A Matemática dos CPF’s</h2>
@@ -150,23 +175,37 @@
             <form>
                 <div class="input-group">
                     <span class="input-group-text">CPF</span>
-                    <input type="text" class="form-control" placeholder="Username">
-                    <button type="button" class="btn btn-primary">Verificar CPF</button>
+                    <input type="text" id="inputCPF" class="form-control" placeholder="Username">
+                    <button type="button" class="btn btn-primary" onclick="BuscarDadosAPI()">Verificar CPF</button>
                 </div>
             </form><br>
+
+            <!-- Alerts are created with the .alert class, followed by one of the contextual classes 
 
             <div class="alert alert-success">
                 <strong>Success!</strong> Indicates a successful or positive action.
             </div>
-            <!-- Alerts are created with the .alert class, followed by one of the contextual classes 
+
                 .alert-success, .alert-info, .alert-warning, .alert-danger, .alert-primary, 
                 .alert-secondary, .alert-light or .alert-dark -->
 
+            <div id="cpfOK" display="none">
+                <div>
+                    <p>CPF: </p>
+                    <p id="CPFFormatado">CPF FORMATADO AQUI</p>
+                </div>
+                <div>
+                    <p>Origem: </p>
+                    <p id="OrigemCPF">Estado de origem aqui</p>
+                </div>
+            </div>
         </article>
-        <footer>
+        <!-- 
+            <footer>
             <p>Projeto API - VerificadorCPF</p>
             <p><small>&copy Copyright 2023 - Rodrigues, Guilherme - Todos os direitos reservados. =) </small></p>
         </footer>
+        -->
     </main>
 </body>
 
