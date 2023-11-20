@@ -32,14 +32,17 @@
             <form>
                 <div class="input-group">
                     <span class="input-group-text">CPF</span>
-                    <input type="text" id="inputCPF" class="form-control" placeholder="Username">
+                    <input type="text" id="inputCPF" class="form-control" placeholder="Username" value="11634098634">
                     <button type="button" class="btn btn-primary" onclick="BuscarDadosAPI()">Verificar CPF</button>
                 </div>
             </form><br>
 
             
-            <div class="alert alert-success">
-                <strong>Successo!</strong><span id="Mensagem"></span>
+            <div class="alert alert-success" id="msgSucesso">
+                <strong>Sucesso!</strong> O CPF procurado é válido!
+            </div>
+            <div class="alert alert-danger" id="msgErro">
+                <strong>Erro!</strong> <span id="respostaErro"></span>
             </div>
             <!-- Alerts are created with the .alert class, followed by one of the contextual classes 
 
@@ -48,13 +51,18 @@
 
             <div id="cpfOK" display="none">
                 <div>
-                    <p>CPF: </p>
-                    <p id="CPFFormatado">CPF FORMATADO AQUI</p>
+                    <span><strong>CPF: </strong></span>
+                    <span id="CPFFormatado"></span>
                 </div>
                 <div>
-                    <p>Origem: </p>
-                    <p id="OrigemCPF">Estado de origem aqui</p>
+                    <span><strong>Origem: </strong></span>
+                    <span id="OrigemCPF"></span>
                 </div>
+                <div>
+                    <span><strong>Horário: </strong></span>
+                    <span id="DataHora"></span>
+                </div>
+
             </div>
         </article>
         <!-- 
