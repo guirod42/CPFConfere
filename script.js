@@ -4,22 +4,22 @@ function BuscarDadosAPI() {
     .then((response) => {
       return response.json();
     })
-    .then((myContent) => {
-      if (myContent['valido'] == false) {
+    .then((data) => {
+      if (data['valido'] == false) {
         cpfOK.style.display = "none";
         msgSucesso.style.display = "none";
         msgErro.style.display = "block";
-        respostaErro.innerHTML =  myContent['mensagem'];
+        respostaErro.innerHTML =  data['mensagem'];
       }
       else {
         cpfOK.style.display = "block";
         msgSucesso.style.display = "block";
         msgErro.style.display = "none";
       }
-      CPFFormatado.innerHTML = myContent['cpf'];
-      OrigemCPF.innerHTML = myContent['origem'];
+      CPFFormatado.innerHTML = data['cpf'];
+      OrigemCPF.innerHTML = data['origem'];
 
-      var data = new Date(myContent['dataHora']);
+      var data = new Date(data['dataHora']);
       var dataFormatada = `${padZero(data.getDate())}/${padZero(data.getMonth() + 1)}/${data.getFullYear()} ${padZero(data.getHours())}:${padZero(data.getMinutes())}:${padZero(data.getSeconds())}`;
       DataHora.innerHTML = dataFormatada;
     });
